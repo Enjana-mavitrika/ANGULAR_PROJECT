@@ -1,0 +1,23 @@
+<section>
+  <h2>Les matériaux disponibles :</h2>
+  <section>
+    <label for="search"><fa name="search" size="lg"></fa> <input type="text" (change)="onChange" /></label>
+  </section>
+  <ul class="materiaux">
+    <li *ngFor="let robinet of robinets" [class.selected]="robinet === selectedRobinet" (click)="onSelect(robinet)">
+      <img class="badge" [src]="robinet.img" alt="photo robinet"> {{ robinet.name }}
+  </ul>
+</section>
+
+<section *ngIf="selectedRobinet">
+  <h2>Détails sur le produit séléctionné : </h2>
+  <ul>
+    <li>{{ selectedRobinet.prixUnit }} &euro;</li>
+    <li>{{ selectedRobinet.couleur }}</li>
+    <li>{{ selectedRobinet.typeProduit }}</li>
+    <li>{{ selectedRobinet.hauteur }}</li>
+    <li>{{ selectedRobinet.hauteurSousBec }}</li>
+    <li>{{ selectedRobinet.profondeurBecLavabo }}</li>
+    <li>{{ selectedRobinet.typeBec }}</li>
+  </ul>
+</section>

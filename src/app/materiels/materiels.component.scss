@@ -1,0 +1,42 @@
+/* MaterielsComponent's private CSS styles */
+.materiaux {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 15em;
+}
+.materiaux img {
+  width: 80px;
+  height: 80px;
+}
+.materiaux li {
+  cursor: pointer;
+  background-color: #EEE;
+  margin: .5em;
+  padding: .3em 0;
+  border-radius: 4px;
+}
+.materiaux li:hover {
+  color: #607D8B;
+  background-color: #DDD;
+  left: .1em;
+}
+.materiaux li.selected {
+  background-color: #CFD8DC;
+  color: white;
+}
+.materiaux li.selected:hover {
+  background-color: #BBD8DC;
+  color: white;
+}
+.materiaux .badge {
+  display: inline-block;
+  font-size: small;
+  color: white;
+  padding: 0.8em 0.7em 0 0.7em;
+  background-color:#405061;
+  line-height: 1em;
+
+  margin-right: .8em;
+  border-radius: 4px 0 0 4px;
+}
