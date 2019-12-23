@@ -9,15 +9,4 @@
   </ul>
 </section>
 
-<section *ngIf="selectedRobinet">
-  <h2>Détails sur le produit séléctionné : </h2>
-  <ul>
-    <li>{{ selectedRobinet.prixUnit }} &euro;</li>
-    <li>{{ selectedRobinet.couleur }}</li>
-    <li>{{ selectedRobinet.typeProduit }}</li>
-    <li>{{ selectedRobinet.hauteur }}</li>
-    <li>{{ selectedRobinet.hauteurSousBec }}</li>
-    <li>{{ selectedRobinet.profondeurBecLavabo }}</li>
-    <li>{{ selectedRobinet.typeBec }}</li>
-  </ul>
-</section>
+<app-details-material [robinet]="selectedRobinet"></app-details-material>
