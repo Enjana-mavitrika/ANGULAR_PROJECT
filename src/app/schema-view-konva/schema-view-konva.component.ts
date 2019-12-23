@@ -17,6 +17,7 @@ export class SchemaViewKonvaComponent implements OnInit {
   selectedButton: any = {
     'toilette': false,
     'lavabo': false,
+    'piece': false,
   }
 
   constructor(private shapeService: ShapeService) { }
@@ -51,6 +52,9 @@ export class SchemaViewKonvaComponent implements OnInit {
     else if (type == 'lavabo') {
       this.addLavabo();
     }
+    else if (type == 'piece') {
+      this.addPiece();
+    }
   }
 
   addToilette() {
@@ -63,6 +67,12 @@ export class SchemaViewKonvaComponent implements OnInit {
     const lavabo = this.shapeService.imgNode(this.stage, this.layer, 'bathroom/lavabo.png');
     this.shapes.push(lavabo.imgNode);
     this.transformers.push(lavabo.tr);
+  }
+
+  addPiece() {
+    const piece = this.shapeService.rectangle(this.stage, this.layer);
+    this.shapes.push(piece.rectNode);
+    this.transformers.push(piece.tr);
   }
 
 

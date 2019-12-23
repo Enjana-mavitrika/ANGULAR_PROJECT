@@ -61,6 +61,52 @@ export class ShapeService {
 
   }
 
+  rectangle(stage: Konva.Stage, layer: Konva.Layer) {
+    const rectNode = new Konva.Rect({
+      x: 20,
+      y: 20,
+      width: 100,
+      height: 50,
+      fillEnable: false,
+      stroke: 'black',
+      strokeWidth: 2,
+      draggable: true,
+      strokeScaleEnabled: false,
+    });
+
+    // add the shape to the layer
+    layer.add(rectNode);
+    layer.batchDraw();
+    
+    // add transformer
+    let tr = new Konva.Transformer({
+      node: rectNode as any,
+      keepRatio: false,
+      enabledAnchors: ['top-left', 'top-right', 'bottom-left', 'bottom-right', 'left', 'right', 'bottom', 'top'],
+      rotateEnabled: false,
+      ignoreStroke: true,
+    });
+    stage.on('click', function (e) {
+      if (!this.clickStartShape) {
+        return;
+      }
+      if (e.target._id == this.clickStartShape._id) {
+        layer.add(tr);
+        tr.attachTo(e.target);
+        layer.draw();
+      }
+      else {
+        tr.detach();
+        layer.draw();
+      }
+    });
+
+    // add transformer to the layer
+    layer.add(tr);
+    layer.draw();
+
+    return { rectNode, tr };
+  }
 
 
 
