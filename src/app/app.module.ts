@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { MaterielsComponent } from './materiels/materiels.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DetailsMaterialComponent } from './details-material/details-material.component';
-import { KonvaModule } from "ng2-konva";
 import { SchemaViewKonvaComponent } from './schema-view-konva/schema-view-konva.component';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { SchemaViewKonvaComponent } from './schema-view-konva/schema-view-konva.
     AppRoutingModule,
     FormsModule,
     AngularFontAwesomeModule,
-    KonvaModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

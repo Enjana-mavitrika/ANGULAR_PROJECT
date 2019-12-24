@@ -12,6 +12,10 @@ export class Shape {
         }
     }
 
+    public delete() {
+      this.konvaNode.destroy();
+    }
+
     public draw(stage: Konva.Stage, layer: Konva.Layer): void {
       const attrs = this.getKonvaNodeAttrs();
       switch(this.type) {
@@ -26,6 +30,9 @@ export class Shape {
         case 'piece':
           const piece = this.rectangle(stage, layer, attrs.x, attrs.y, attrs.width, attrs.height);
           this.konvaNode = piece.rectNode;
+          break;
+        default:
+          break;
       }
     }
 
@@ -72,35 +79,13 @@ export class Shape {
         image: imageObj,
         width: width,
         height: height,
+        name: 'shape',
         draggable: true,
       });
-  
       // add the shape to the layer
       layer.add(imgNode);
       layer.batchDraw();
-  
-      // add transformer
-      let tr = new Konva.Transformer({
-        node: imgNode as any,
-        keepRatio: true,
-        enabledAnchors: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
-        rotateEnabled: false,
-      });
-      stage.on('click', function (e) {
-        if (!this.clickStartShape) {
-          return;
-        }
-        if (e.target._id == this.clickStartShape._id) {
-          layer.add(tr);
-          tr.attachTo(e.target);
-          layer.draw();
-        }
-        else {
-          tr.detach();
-          layer.draw();
-        }
-      });
-  
+      // handleTransform event
       imgNode.on('transform', function () {
         // reset scale
         imgNode.setAttrs({
@@ -109,11 +94,8 @@ export class Shape {
           scaleX: 1
         });
       });
-      layer.add(tr);
-      layer.draw();
   
-      return { imgNode, tr };
-  
+      return { imgNode };
     }
   
     private rectangle(stage: Konva.Stage, layer: Konva.Layer, x: number=50, y: number=50, width: number=100, height: number=100) {
@@ -122,45 +104,29 @@ export class Shape {
         y: y,
         width: width,
         height: height,
+        name: 'shape',
         fillEnable: false,
         stroke: 'grey',
         strokeWidth: 4,
         draggable: true,
         strokeScaleEnabled: false,
       });
-  
       // add the shape to the layer
       layer.add(rectNode);
       layer.batchDraw();
-      
-      // add transformer
-      let tr = new Konva.Transformer({
-        node: rectNode as any,
-        keepRatio: false,
-        enabledAnchors: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
-        rotateEnabled: false,
-        ignoreStroke: true,
+      // handle tranform event
+      rectNode.on('transform', function () {
+        // reset scale
+        rectNode.setAttrs({
+          width: rectNode.width() * rectNode.scaleX(),
+          height: rectNode.height() * rectNode.scaleY(),
+          scaleX: 1
+        });
       });
-      stage.on('click', function (e) {
-        if (!this.clickStartShape) {
-          return;
-        }
-        if (e.target._id == this.clickStartShape._id) {
-          layer.add(tr);
-          tr.attachTo(e.target);
-          layer.draw();
-        }
-        else {
-          tr.detach();
-          layer.draw();
-        }
-      });
-  
-      // add transformer to the layer
-      layer.add(tr);
+      // layer.add(tr);
       layer.draw();
-  
-      return { rectNode, tr };
+
+      return { rectNode };
     }
 
 }
