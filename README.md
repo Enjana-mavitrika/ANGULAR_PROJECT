@@ -1,27 +1,14 @@
-# MonPremierProjet
+# SOLOFO SCHEMA
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
+Ce projet web a été développer dans le but de maitriser les technologies : **Angular**, **TypeScript**, **Konva** afin de préparer un stage de fin d'étude.
+L'application permet de créer facilement différents **schémas de conception** qui respectent les normes pour les travaux de plomberie pour une maison.
+Le but de l'application est de faciliter le travail des plombiers indépendant, car ils pourront génerer les documents nécessaires afin d'établir au plus vite un devis et un contrat officiel avec leurs clients.
 
-## Development server
+## auteur
+Solofo Rabonarijaona - _Développeur Web FullStack_
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## historiques des fonctionnalités
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### v.1.0.0 :
+ - Concevoir schéma : _Alimentation d'eau_ (avec les outils de bases)
+ - Sauvegarder et Charger un schémas (dans le mémoire du navigateur)

@@ -2,6 +2,7 @@ import Konva from 'konva';
 import { Shape } from './shape';
 
 export class Schema {
+  
   stage: Konva.Stage;
   layer: Konva.Layer;
   shapes: Shape[] = [];
@@ -80,7 +81,6 @@ export class Schema {
   }
 
   private drawAll(): void {
-    // draw shapes
     for (let shape of this.shapes) {
       shape.draw(this.stage, this.layer);
     }
