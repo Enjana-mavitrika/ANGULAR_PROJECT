@@ -2,10 +2,11 @@ import Konva from 'konva';
 import { Shape } from './shape';
 
 export class Schema {
-  
+
   stage: Konva.Stage;
   layer: Konva.Layer;
   shapes: Shape[] = [];
+  selectedShape: Shape;
 
   constructor(container: string = 'schema-view-konva', width: number = 900, height: number = 700) {
     this.stage = new Konva.Stage({
@@ -16,25 +17,59 @@ export class Schema {
     });
     this.layer = new Konva.Layer();
     this.stage.add(this.layer);
-    this.onClickAddTransformersToShapes();
+    this.onClickStage();
+    this.onKeydown();
   }
 
-  private onClickAddTransformersToShapes() {
-    this.stage.on('click tap', (e) => {
-      // if click on empty area - remove all transformers
-      if (e.target === this.stage) {
-        this.deleteTransformers();
-        this.layer.draw();
-        return;
+  private onKeydown() {
+    document.addEventListener('keydown', (e) => {
+      // if press delete on selected shape
+      if (this.selectedShape && e.keyCode == 46) {
+        e.preventDefault();
+        this.removeSelectedShape();
       }
-      // do nothing if clicked NOT on our rectangles
-      if (!e.target.hasName('shape')) {
-        return;
-      }
-      // remove old transformers
-      this.deleteTransformers();
-      this.addTranformer(e.target);
     });
+  }
+
+  private removeSelectedShape() {
+    this.selectedShape.delete();
+    this.deleteTransformers();
+    const newShapes = this.shapes.filter((shape) => shape !== this.selectedShape);
+    this.shapes = newShapes;
+    this.layer.batchDraw();
+  }
+
+  private onClickStage() {
+    this.stage.on('click tap', (e) => {
+      // select shape on click
+      this.selectedShape = this.findShape(e.target);
+      // add transformer to shape on click
+      this.addTransformerToSelectedShape(e.target);
+    });
+  }
+
+  private findShape(shapeNode: Konva.Node): Shape {
+    for (let shape of this.shapes) {
+      if (shape.konvaNode === shapeNode) {
+        return shape;
+      }
+    }
+  }
+
+  private addTransformerToSelectedShape(shape: Konva.Node) {
+    // if click on empty area - remove all transformers
+    if (shape === this.stage) {
+      this.deleteTransformers();
+      this.layer.draw();
+      return;
+    }
+    // do nothing if clicked NOT on our rectangles
+    if (!shape.hasName('shape')) {
+      return;
+    }
+    // remove old transformers
+    this.deleteTransformers();
+    this.addTranformer(shape);
   }
 
   private deleteTransformers() {
