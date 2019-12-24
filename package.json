@@ -1,6 +1,6 @@
 {
-  "name": "mon-premier-projet",
-  "version": "0.0.0",
+  "name": "solofo-schema",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
