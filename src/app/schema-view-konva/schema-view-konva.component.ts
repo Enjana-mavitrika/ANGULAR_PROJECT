@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Konva from 'konva';
 import { ShapeService } from '../shape.service';
+import { Schema } from '../schema';
 
 @Component({
   selector: 'app-schema-view-konva',
@@ -13,6 +14,7 @@ export class SchemaViewKonvaComponent implements OnInit {
   stage: Konva.Stage;
   layer: Konva.Layer;
   transformers: Konva.Transformer[] = [];
+  schema: Schema;
 
   selectedButton: any = {
     'toilette': false,
@@ -20,17 +22,58 @@ export class SchemaViewKonvaComponent implements OnInit {
     'piece': false,
   }
 
+  save() {
+    // save shapes
+    const shapesRepo = [];
+    for (let shape of this.shapes) {
+      shapesRepo.push(shape.toJSON())
+    }
+    localStorage.setItem('shapesRepo', JSON.stringify(shapesRepo));
+    // save stage
+    const stageRepo = this.stage.toJSON();
+    localStorage.setItem('stageRepo', stageRepo);
+    // save layer
+    const layerRepo = this.layer.toJSON();
+    localStorage.setItem('layerRepo', layerRepo);
+    // save transformers
+    const transformersRepo = [];
+    for (let tr of this.transformers) {
+      transformersRepo.push(tr.toJSON());
+    }
+    localStorage.setItem('transformersRepo', JSON.stringify(transformersRepo));
+  }
+
+  load() {
+    // load stage
+    const stageRepo = localStorage.getItem('stageRepo');
+    this.stage = Konva.Node.create(stageRepo, 'schema-view-konva');
+    // load layer
+    const layerRepo = localStorage.getItem('layerRepo');
+    this.layer = Konva.Node.create(layerRepo);
+    this.layer.destroyChildren();
+    // load shapes
+    const shapesRepo = JSON.parse(localStorage.getItem('shapesRepo'));
+    this.shapes = [];
+    for (let shape of shapesRepo) {
+      console.log(Konva.Node.create(shape))
+      this.shapes.push(Konva.Node.create(shape));
+      this.layer.add(Konva.Node.create(shape));
+    }
+    // load transformers
+    const transformersRepo = JSON.parse(localStorage.getItem('transformersRepo'));
+    this.transformers = [];
+    for (let tr of transformersRepo) {
+      this.transformers.push(Konva.Node.create(tr));
+    }
+    // draw
+    this.stage.add(this.layer);
+    this.layer.batchDraw();
+  }
+
   constructor(private shapeService: ShapeService) { }
 
   ngOnInit() {
-    this.stage = new Konva.Stage({
-      container: 'schema-view-konva',
-      width: 900,
-      height: 700,
-      draggable: true,
-    });
-    this.layer = new Konva.Layer();
-    this.stage.add(this.layer);
+    this.schema = new Schema();
   }
 
   clearSelection() {
@@ -43,36 +86,20 @@ export class SchemaViewKonvaComponent implements OnInit {
     this.selectedButton[type] = true;
   }
 
-  addShape(type: string) {
-    this.clearSelection();
-    this.setSelection(type);
-    if (type == 'toilette') {
-      this.addToilette();
-    }
-    else if (type == 'lavabo') {
-      this.addLavabo();
-    }
-    else if (type == 'piece') {
-      this.addPiece();
-    }
-  }
-
   addToilette() {
-    const toilette = this.shapeService.imgNode(this.stage, this.layer, 'bathroom/toilette.png');
-    this.shapes.push(toilette.imgNode);
-    this.transformers.push(toilette.tr);
+    this.schema.addToilette();
   }
 
   addLavabo() {
-    const lavabo = this.shapeService.imgNode(this.stage, this.layer, 'bathroom/lavabo.png');
-    this.shapes.push(lavabo.imgNode);
-    this.transformers.push(lavabo.tr);
+    this.schema.addLavabo();
   }
 
   addPiece() {
-    const piece = this.shapeService.rectangle(this.stage, this.layer);
-    this.shapes.push(piece.rectNode);
-    this.transformers.push(piece.tr);
+    this.schema.addPiece();
+  }
+
+  clear() {
+    this.schema.clear();
   }
 
 

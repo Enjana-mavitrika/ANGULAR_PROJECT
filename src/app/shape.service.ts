@@ -8,16 +8,16 @@ export class ShapeService {
 
   constructor() { }
 
-  imgNode(stage: Konva.Stage, layer: Konva.Layer, img: string) {
+  imgNode(stage: Konva.Stage, layer: Konva.Layer, img: string, x: number=50, y: number=50, width: number=100, height: number=100) {
     // create img node
     let imageObj = new Image();
     imageObj.src = `/assets/images/icons/${img}`;
     const imgNode = new Konva.Image({
-      x: 50,
-      y: 50,
+      x: x,
+      y: y,
       image: imageObj,
-      width: 106,
-      height: 118,
+      width: width,
+      height: height,
       draggable: true,
     });
 
@@ -68,8 +68,8 @@ export class ShapeService {
       width: 100,
       height: 50,
       fillEnable: false,
-      stroke: 'black',
-      strokeWidth: 2,
+      stroke: 'grey',
+      strokeWidth: 4,
       draggable: true,
       strokeScaleEnabled: false,
     });
@@ -82,7 +82,7 @@ export class ShapeService {
     let tr = new Konva.Transformer({
       node: rectNode as any,
       keepRatio: false,
-      enabledAnchors: ['top-left', 'top-right', 'bottom-left', 'bottom-right', 'left', 'right', 'bottom', 'top'],
+      enabledAnchors: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
       rotateEnabled: false,
       ignoreStroke: true,
     });
