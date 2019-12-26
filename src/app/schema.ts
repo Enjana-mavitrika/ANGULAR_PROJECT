@@ -1,11 +1,13 @@
 import Konva from 'konva';
-import { Shape } from './shape';
+import Shape from './shape';
+import Line from './line';
 
-export class Schema {
+export default class Schema {
 
   stage: Konva.Stage;
   layer: Konva.Layer;
   shapes: Shape[] = [];
+  lines: Line[] = [];
   selectedShape: Shape;
 
   constructor(container: string = 'schema-view-konva', width: number = 900, height: number = 700) {
@@ -35,7 +37,9 @@ export class Schema {
     this.selectedShape.delete();
     this.deleteTransformers();
     const newShapes = this.shapes.filter((shape) => shape !== this.selectedShape);
+    const newLines = this.lines.filter((line) => line !== this.selectedShape);
     this.shapes = newShapes;
+    this.lines = newLines;
     this.layer.batchDraw();
   }
 
@@ -52,6 +56,11 @@ export class Schema {
     for (let shape of this.shapes) {
       if (shape.konvaNode === shapeNode) {
         return shape;
+      }
+    }
+    for (let line of this.lines) {
+      if (line.konvaNode === shapeNode) {
+        return line;
       }
     }
   }
@@ -88,7 +97,7 @@ export class Schema {
     this.layer.draw();
   }
 
-  public shapesToJson() {
+  private shapesToJson() {
     const shapes = [];
     for (let shape of this.shapes) {
       shapes.push(shape.toJSON());
@@ -96,7 +105,15 @@ export class Schema {
     return JSON.stringify(shapes);
   }
 
-  public JsonToShapes(shapesJSON: string) {
+  private linesToJson() {
+    const lines = [];
+    for (let line of this.lines) {
+      lines.push(line.toJSON());
+    }
+    return JSON.stringify(lines);
+  }
+
+  private jsonToShapes(shapesJSON: string) {
     const shapes = JSON.parse(shapesJSON);
     const shapesObj = [];
     for (let shape of shapes) {
@@ -105,38 +122,65 @@ export class Schema {
     return shapesObj;
   }
 
+  private jsonToLines(linesJSON: string) {
+    const lines = JSON.parse(linesJSON);
+    const linesObj = [];
+    for (let line of lines) {
+      linesObj.push(Line.create(line));
+    }
+    return linesObj;
+  }
+
   public save() {
-    localStorage.setItem('schema', this.shapesToJson());
+    const shema = { shapes : this.shapesToJson(), lines: this.linesToJson() };
+    localStorage.setItem('schema', JSON.stringify(shema));
   }
 
   public load() {
     this.clear();
-    this.shapes = this.JsonToShapes(localStorage.getItem('schema'));
+    const shema = JSON.parse(localStorage.getItem('schema'));
+    this.shapes = this.jsonToShapes(shema.shapes);
+    this.lines = this.jsonToLines(shema.lines);
     this.drawAll();
   }
 
   private drawAll(): void {
     for (let shape of this.shapes) {
-      shape.draw(this.stage, this.layer);
+      shape.draw(this.layer);
+    }
+    for (let line of this.lines) {
+      line.draw(this.layer);
     }
   }
 
   public addToilette() {
     const toilette = new Shape('toilette');
-    toilette.draw(this.stage, this.layer);
+    toilette.draw(this.layer);
     this.shapes.push(toilette);
   }
 
   public addLavabo() {
     const lavabo = new Shape('lavabo');
-    lavabo.draw(this.stage, this.layer);
+    lavabo.draw(this.layer);
     this.shapes.push(lavabo);
   }
 
   public addPiece() {
     const piece = new Shape('piece');
-    piece.draw(this.stage, this.layer);
+    piece.draw(this.layer);
     this.shapes.push(piece);
+  }
+
+  public addEauChaude() {
+    const eauChaude = new Line('eau-chaude');
+    eauChaude.draw(this.layer);
+    this.lines.push(eauChaude);
+  }
+
+  public addEauFroide() {
+    const eauFroide = new Line('eau-froide');
+    eauFroide.draw(this.layer);
+    this.lines.push(eauFroide);
   }
 
   public clear() {
@@ -146,8 +190,14 @@ export class Schema {
     for (let shape of this.shapes) {
       shape.delete();
     }
+    // delete all line nodes
+    for (let line of this.lines) {
+      line.delete();
+    }
     // reinit shapes state   
     this.shapes = [];
+    // reinit lines state
+    this.lines = [];
     this.layer.batchDraw();
   }
 }

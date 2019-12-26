@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Konva from 'konva';
-import { Schema } from '../schema';
+import Schema from '../schema';
 
 @Component({
   selector: 'app-schema-view-konva',
@@ -47,6 +47,14 @@ export class SchemaViewKonvaComponent implements OnInit {
 
   addPiece() {
     this.schema.addPiece();
+  }
+
+  addEauChaude() {
+    this.schema.addEauChaude();
+  }
+
+  addEauFroide() {
+    this.schema.addEauFroide();
   }
 
   clear() {
