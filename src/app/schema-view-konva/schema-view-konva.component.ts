@@ -45,8 +45,24 @@ export class SchemaViewKonvaComponent implements OnInit {
     this.schema.addLavabo();
   }
 
+  addEvier() {
+    this.schema.addEvier();
+  }
+
+  addEvier2() {
+    this.schema.addEvier2();
+  }
+
+  addDouche() {
+    this.schema.addDouche();
+  }
+
   addPiece() {
     this.schema.addPiece();
+  }
+
+  addSol() {
+    this.schema.addSol();
   }
 
   addEauChaude() {
@@ -55,6 +71,30 @@ export class SchemaViewKonvaComponent implements OnInit {
 
   addEauFroide() {
     this.schema.addEauFroide();
+  }
+  
+  addRaccordEauChaude() {
+    this.schema.addRaccordEauChaude();
+  }
+
+  addRaccordEauFroide() {
+    this.schema.addRaccordEauFroide();
+  }
+
+  addChauffeEau() {
+    this.schema.addChauffeEau();
+  }
+
+  addLaveLinge() {
+    this.schema.addLaveLinge();
+  }
+
+  addLaveVaisselle() {
+    this.schema.addLaveVaisselle();
+  }
+
+  addBaignoire() {
+    this.schema.addBaignoire();
   }
 
   clear() {

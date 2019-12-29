@@ -165,10 +165,34 @@ export default class Schema {
     this.shapes.push(lavabo);
   }
 
+  public addEvier() {
+    const evier = new Shape('evier');
+    evier.draw(this.layer);
+    this.shapes.push(evier);
+  }
+
+  public addEvier2() {
+    const evier2 = new Shape('evier2');
+    evier2.draw(this.layer);
+    this.shapes.push(evier2);
+  }
+
+  public addDouche() {
+    const douche =  new Shape('douche');
+    douche.draw(this.layer);
+    this.shapes.push(douche);
+  }
+
   public addPiece() {
     const piece = new Shape('piece');
     piece.draw(this.layer);
     this.shapes.push(piece);
+  }
+
+  public addSol() {
+    const sol = new Shape('sol');
+    sol.draw(this.layer);
+    this.shapes.push(sol);
   }
 
   public addEauChaude() {
@@ -181,6 +205,42 @@ export default class Schema {
     const eauFroide = new Line('eau-froide');
     eauFroide.draw(this.layer);
     this.lines.push(eauFroide);
+  }
+
+  public addRaccordEauChaude() {
+    const raccord = new Shape('raccord-eau-chaude');
+    raccord.draw(this.layer);
+    this.shapes.push(raccord);
+  }
+
+  public addRaccordEauFroide() {
+    const raccord = new Shape('raccord-eau-froide');
+    raccord.draw(this.layer);
+    this.shapes.push(raccord);
+  }
+
+  public addChauffeEau() {
+    const chauffeEau = new Shape('chauffe-eau');
+    chauffeEau.draw(this.layer);
+    this.shapes.push(chauffeEau);
+  }
+
+  public addLaveLinge() {
+    const laveLinge = new Shape('lave-linge');
+    laveLinge.draw(this.layer);
+    this.shapes.push(laveLinge); 
+  }
+
+  public addLaveVaisselle() {
+    const laveVaisselle = new Shape('lave-vaisselle');
+    laveVaisselle.draw(this.layer);
+    this.shapes.push(laveVaisselle);
+  }
+
+  public addBaignoire() {
+    const baignoire = new Shape('baignoire');
+    baignoire.draw(this.layer);
+    this.shapes.push(baignoire);
   }
 
   public clear() {

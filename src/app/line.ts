@@ -46,7 +46,7 @@ export default class Line extends Shape {
             points,
             stroke,
             strokeWidth,
-            draggable: true,
+            opacity: 0.8,
         });
         // add the line to the layer
         layer.add(lineNode);
@@ -57,7 +57,8 @@ export default class Line extends Shape {
             y: lineNode.points()[1],
             radius: 8,
             fill: stroke,
-            draggable: true
+            draggable: true,
+            opacity: 0.8,
         })
         layer.add(anchor1);
         const anchor2 = new Konva.Circle({
@@ -65,7 +66,8 @@ export default class Line extends Shape {
             y: lineNode.points()[3],
             radius: 8,
             fill: stroke,
-            draggable: true
+            draggable: true,
+            opacity: 0.8,
         })
         layer.add(anchor2);
         // update line when moving anchors
@@ -75,9 +77,9 @@ export default class Line extends Shape {
                 anchor1.y(),
                 anchor2.x(),
                 anchor2.y(),
-              ]
-              lineNode.points(points);
-              layer.batchDraw();
+            ];
+            lineNode.points(points);
+            layer.batchDraw();
         });
         anchor2.on('dragmove', () => {
             const points = [
@@ -85,9 +87,9 @@ export default class Line extends Shape {
                 anchor1.y(),
                 anchor2.x(),
                 anchor2.y(),
-              ]
-              lineNode.points(points);
-              layer.batchDraw();
+            ]
+            lineNode.points(points);
+            layer.batchDraw();
         });
 
         this.konvaNode = lineNode;
