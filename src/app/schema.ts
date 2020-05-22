@@ -10,7 +10,7 @@ export default class Schema {
   lines: Line[] = [];
   selectedShape: Shape;
 
-  constructor(container: string = 'schema-view-konva', width: number = 900, height: number = 700) {
+  constructor(container: string = 'schema-view-konva', width: number = 1000, height: number = 700) {
     this.stage = new Konva.Stage({
       container: container,
       width: width,
@@ -228,7 +228,7 @@ export default class Schema {
   public addLaveLinge() {
     const laveLinge = new Shape('lave-linge');
     laveLinge.draw(this.layer);
-    this.shapes.push(laveLinge); 
+    this.shapes.push(laveLinge);
   }
 
   public addLaveVaisselle() {
@@ -254,7 +254,7 @@ export default class Schema {
     for (let line of this.lines) {
       line.delete();
     }
-    // reinit shapes state   
+    // reinit shapes state
     this.shapes = [];
     // reinit lines state
     this.lines = [];

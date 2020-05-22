@@ -1,7 +1,7 @@
 <section>
   <h2>Les matériaux disponibles :</h2>
   <section>
-    <label for="search"><fa name="search" size="lg"></fa> <input type="text" (change)="onChange" /></label>
+    <label for="search"><fa name="search" size="lg"></fa> <input type="text" /></label>
   </section>
   <ul class="materiaux">
     <li *ngFor="let robinet of robinets" [class.selected]="robinet === selectedRobinet" (click)="onSelect(robinet)">

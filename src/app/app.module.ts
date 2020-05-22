@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterielsComponent } from './materiels/materiels.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { DetailsMaterialComponent } from './details-material/details-material.component';
 import { SchemaViewKonvaComponent } from './schema-view-konva/schema-view-konva.component';
 
@@ -21,6 +22,7 @@ import { SchemaViewKonvaComponent } from './schema-view-konva/schema-view-konva.
     AppRoutingModule,
     FormsModule,
     AngularFontAwesomeModule,
+    MDBBootstrapModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

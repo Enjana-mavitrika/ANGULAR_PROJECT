@@ -1,23 +1,51 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color">
+        <!-- Navbar brand -->
+        <mdb-navbar-brand><a class="navbar-brand" href="#">Options</a></mdb-navbar-brand>
+        <!-- Collapsible content -->
+        <links>
+                <!-- Links -->
+                <ul class="navbar-nav mr-auto">
+                        <!-- Dropdown -->
+                        <li class="nav-item dropdown" dropdown>
+                                <a dropdownToggle mdbWavesEffect type="button"
+                                        class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                                        Edit<span class="caret"></span></a>
+                                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                                        <a class="dropdown-item waves-light" (click)='save()' mdbWavesEffect >Save <mdb-icon fas icon="save"></mdb-icon></a>
+                                        <a class="dropdown-item waves-light" (click)='load()' mdbWavesEffect >Load <mdb-icon fas icon="upload"></mdb-icon></a>
+                                        <a class="dropdown-item waves-light" (click)='clear()' mdbWavesEffect >Clear <mdb-icon fas icon="ban"></mdb-icon></a>
+                                        
+                                </div>
+                        </li>
+                </ul>
+                <!-- Links -->
+        </links>
+        <!-- Collapsible content -->
+</mdb-navbar>
+<!--/.Navbar-->
+
 <section>
+
         <div id="schema-view-konva"></div>
         <div>
-                <button (click)='addToilette()'><img src="../../assets/images/icons/bathroom/toilette.png"></button>
-                <button (click)='addLavabo()'><img src="../../assets/images/icons/bathroom/lavabo.png"></button>
-                <button (click)='addEvier()'><img src="../../assets/images/icons/bathroom/evier.png"></button>
-                <button (click)='addEvier2()'><img src="../../assets/images/icons/bathroom/evier2.png"></button>
-                <button (click)='addDouche()'><img src="../../assets/images/icons/bathroom/douche.png"></button>
-                <button (click)='addPiece()'><img src="../../assets/images/icons/piece/piece.jpg"></button>
-                <button (click)='addSol()'><img src="../../assets/images/icons/piece/sol.png"></button>
-                <button (click)='addEauChaude()'><img src="../../assets/images/icons/plomberie/tube-rouge.png"></button>
-                <button (click)='addEauFroide()'><img src="../../assets/images/icons/plomberie/tube-bleu.png"></button>
-                <button (click)='addRaccordEauChaude()'><img src="../../assets/images/icons/plomberie/raccord-chaud.png"></button>
-                <button (click)='addRaccordEauFroide()'><img src="../../assets/images/icons/plomberie/raccord-froid.png"></button>
-                <button (click)='addBaignoire()'><img src="../../assets/images/icons/menager/baignoire.png"></button>
-                <button (click)='addLaveLinge()'><img src="../../assets/images/icons/menager/lave-linge.png"></button>
-                <button (click)='addLaveVaisselle()'><img src="../../assets/images/icons/menager/lave-vaisselle.png"></button>
-                <button (click)='addChauffeEau()'><img src="../../assets/images/icons/menager/chauffe-eau.png"></button>
-                <button (click)='clear()'>Clear</button>
-                <button (click)='save()'>Save</button>
-                <button (click)='load()'>Load</button>
+                <button mdbBtn type="button" color="info" outline="true" mdbWavesEffect (click)='addToilette()'><img src="../../assets/images/icons/bathroom/toilette.png"></button>
+                <button mdbBtn type="button" color="info" outline="true" mdbWavesEffect (click)='addLavabo()'><img src="../../assets/images/icons/bathroom/lavabo.png"></button>
+                <button mdbBtn type="button" color="info" outline="true" mdbWavesEffect (click)='addEvier()'><img src="../../assets/images/icons/bathroom/evier.png"></button>
+                <button mdbBtn type="button" color="info" outline="true" mdbWavesEffect (click)='addEvier2()'><img src="../../assets/images/icons/bathroom/evier2.png"></button>
+                <button mdbBtn type="button" color="info" outline="true" mdbWavesEffect (click)='addDouche()'><img src="../../assets/images/icons/bathroom/douche.png"></button>
+                <button mdbBtn type="button" color="info" outline="true" mdbWavesEffect (click)='addPiece()'><img src="../../assets/images/icons/piece/piece.jpg"></button>
+                <button mdbBtn type="button" color="info" outline="true" mdbWavesEffect (click)='addSol()'><img src="../../assets/images/icons/piece/sol.png"></button>
+                <button mdbBtn type="button" color="info" outline="true" mdbWavesEffect (click)='addEauChaude()'><img src="../../assets/images/icons/plomberie/tube-rouge.png"></button>
+                <button mdbBtn type="button" color="info" outline="true" mdbWavesEffect (click)='addEauFroide()'><img src="../../assets/images/icons/plomberie/tube-bleu.png"></button>
+                <button mdbBtn type="button" color="info" outline="true" mdbWavesEffect (click)='addRaccordEauChaude()'><img
+                                src="../../assets/images/icons/plomberie/raccord-chaud.png"></button>
+                <button mdbBtn type="button" color="info" outline="true" mdbWavesEffect (click)='addRaccordEauFroide()'><img
+                                src="../../assets/images/icons/plomberie/raccord-froid.png"></button>
+                <button mdbBtn type="button" color="info" outline="true" mdbWavesEffect (click)='addBaignoire()'><img src="../../assets/images/icons/menager/baignoire.png"></button>
+                <button mdbBtn type="button" color="info" outline="true" mdbWavesEffect (click)='addLaveLinge()'><img src="../../assets/images/icons/menager/lave-linge.png"></button>
+                <button mdbBtn type="button" color="info" outline="true" mdbWavesEffect (click)='addLaveVaisselle()'><img
+                                src="../../assets/images/icons/menager/lave-vaisselle.png"></button>
+                <button mdbBtn type="button" color="info" outline="true" mdbWavesEffect (click)='addChauffeEau()'><img src="../../assets/images/icons/menager/chauffe-eau.png"></button>
         </div>
 </section>
